@@ -2,24 +2,24 @@
 class item{
 
     private $_id;
-    private $_nombre;
-    private $_cantidad;
-    private $_precio;
-    private $_descripcion;
+    private $_modelo;
+    private $_tipo;
+    private $_anio;
+    private $_foto;
 
     //AGREGAR ITEMS
-    public static function AgregarItem($nombre,$cantidad,$precio,$descripcion)
+    public static function AgregarItem($modelo,$tipo,$anio,$foto)
     {
         $rta = false;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
         $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into  
-        items (nombre,cantidad,precio,descripcion)
-        values(:nombre,:cantidad,:precio,:descripcion)");
+        vehiculo (modelo,tipo,anio,foto)
+        values(:modelo,:tipo,:anio,:foto)");
 
-        $consulta->bindValue(':nombre',$nombre);
-        $consulta->bindValue(':cantidad', $cantidad);
-        $consulta->bindValue(':precio', $precio);
-        $consulta->bindValue(':descripcion',$descripcion);
+        $consulta->bindValue(':modelo',$modelo);
+        $consulta->bindValue(':tipo', $tipo);
+        $consulta->bindValue(':anio', $anio);
+        $consulta->bindValue(':foto',$foto);
 
         if($consulta->execute()){
             $rta = true;
@@ -31,23 +31,32 @@ class item{
     public static function TraerTodosLosItems()
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM items");
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM vehiculo");
         $consulta->execute();
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($consulta);
     }
    //TRAER ITEM POR ID
-   public static function TraerItemPorId($id)
+   public static function TraerItemPorId($modelo)
    {
        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-       $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM items WHERE id=:id");
-       $consulta->bindValue(":id",$id);
+       $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM vehiculo WHERE modelo=:modelo");
+       $consulta->bindValue(":modelo",$modelo);
        $consulta->execute();
        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-       //$nombresusuario = json_encode($datos);
-       //return $nombresusuario;
+       //$modelosusuario = json_encode($datos);
+       //return $modelosusuario;
        return json_encode($datos);     
    }
-
+    public static function borrarVehiculo($id){
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM vehiculo WHERE id=:id");
+        $consulta->bindValue(":id",$id);
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        //$modelosusuario = json_encode($datos);
+        //return $modelosusuario;
+        return json_encode($datos);     
+    }
 }
 ?>

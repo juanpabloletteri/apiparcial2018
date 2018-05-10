@@ -27,11 +27,11 @@ $app = new \Slim\App(["settings" => $config]);
 //ALTA USUARIO *******************/
 $app->post('/altaItem',function($request,$response){
     $datos = $request->getParsedBody();
-    $nombre = $datos['nombre'];
-    $cantidad = $datos['cantidad'];
-    $precio = $datos['precio'];
-    $descripcion = $datos['descripcion'];
-    $response->write(item::AgregarItem($nombre,$cantidad,$precio,$descripcion));
+    $modelo = $datos['modelo'];
+    $tipo = $datos['tipo'];
+    $anio = $datos['anio'];
+    $foto = $datos['foto'];
+    $response->write(item::AgregarItem($modelo,$tipo,$anio,$foto));
 });
 
 //TRAER TODOS LOS USUARIOS *************************/
@@ -43,11 +43,18 @@ $app->get('/traerTodosLosItems',function ($request,$response){
 //TRAER USUARIO POR ID *************************/
 $app->post('/traerItemPorId',function ($request,$response){
     $datos = $request->getParsedBody();
-    $id = $datos['id'];
-    $response->write(item::TraerItemPorId($id));
+    $modelo = $datos['modelo'];
+    $response->write(item::TraerItemPorId($modelo));
     return $response;
 });
 
+//TRAER USUARIO POR ID *************************/
+$app->post('/borrarVehiculo',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(item::borrarVehiculo($id));
+    return $response;
+});
 
 
 
@@ -71,13 +78,13 @@ $app->get('/traerMails',function ($request,$response){
     return $response;
 });
 
-//TRAER NOMBRES DE USUARIO *************************/
-$app->get('/traerNombresusuario',function ($request,$response){
+//TRAER modeloS DE USUARIO *************************/
+$app->get('/traermodelosusuario',function ($request,$response){
     $response->write(usuario::TraerApodoJugador());
     return $response;
 });
 
-//TRAER MAILS Y NOMBRES DE USUARIO *************************/
+//TRAER MAILS Y modeloS DE USUARIO *************************/
 $app->get('/traerMailsyApodos',function ($request,$response){
     $response->write(usuario::TraerMailsyApodoJugador());
     return $response;
@@ -143,46 +150,46 @@ $app->get('/todoslosAdministrativos',function ($reuqest,$response){
 //ALTA PROFESOR*******************/
 $app->post('/altaProfesor',function($request,$response){
     $datos = $request->getParsedBody();
-    $nombre = $datos['nombre'];
+    $modelo = $datos['modelo'];
     $apellido = $datos['apellido'];
     $dni = $datos['dni'];
     $mail = $datos['mail'];
     $sexo = $datos['sexo'];
-    $response->write(usuario::AgregarProfesor($nombre,$apellido,$dni,$mail,$sexo));
+    $response->write(usuario::AgregarProfesor($modelo,$apellido,$dni,$mail,$sexo));
 });
 //********************************/
 //ALTA ADMINISTRATIVO*******************/
 $app->post('/altaAdministrativo',function($request,$response){
     $datos = $request->getParsedBody();
-    $nombre = $datos['nombre'];
+    $modelo = $datos['modelo'];
     $apellido = $datos['apellido'];
     $dni = $datos['dni'];
     $mail = $datos['mail'];
     $sexo = $datos['sexo'];
-    $response->write(usuario::AgregarAdministrativo($nombre,$apellido,$dni,$mail,$sexo));
+    $response->write(usuario::AgregarAdministrativo($modelo,$apellido,$dni,$mail,$sexo));
 });
 //*************************************/
 //ALTA ALUMNO*******************/
 $app->post('/altaAlumno',function($request,$response){
     $datos = $request->getParsedBody();
-    $nombre = $datos['nombre'];
+    $modelo = $datos['modelo'];
     $apellido = $datos['apellido'];
     $dni = $datos['dni'];
     $mail = $datos['mail'];
     $sexo = $datos['sexo'];
-    $response->write(usuario::AgregarAlumno($nombre,$apellido,$dni,$mail,$sexo));
+    $response->write(usuario::AgregarAlumno($modelo,$apellido,$dni,$mail,$sexo));
 });
 /******************************
 *************************************
 ALTA ADMIN*******************/
 $app->post('/altaAdmin',function($request,$response){
     $datos = $request->getParsedBody();
-    $nombre = $datos['nombre'];
+    $modelo = $datos['modelo'];
     $apellido = $datos['apellido'];
     $dni = $datos['dni'];
     $mail = $datos['mail'];
     $sexo = $datos['sexo'];
-    $response->write(usuario::AgregarAdmin($nombre,$apellido,$dni,$mail,$sexo));
+    $response->write(usuario::AgregarAdmin($modelo,$apellido,$dni,$mail,$sexo));
 });
 /*******************************************
  * *****************************
@@ -207,10 +214,10 @@ $app->post('/CambiarPassword',function($request,$response){
 $app->post('/modificarUsuario',function($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
-    $nombre = $datos['nombre'];
+    $modelo = $datos['modelo'];
     $apellido = $datos['apellido'];
     $mail = $datos['mail'];
-    $response->write(usuario::modificarUsuario($id,$nombre,$apellido,$mail));
+    $response->write(usuario::modificarUsuario($id,$modelo,$apellido,$mail));
 
     return $response;
 });
@@ -237,16 +244,16 @@ $app->post('/imagenUsuario',function($request,$response){
 */
 $app->post('/altaMateria',function($request,$response){
     $datos = $request->getParsedBody();
-    $nombre = $datos['nombre'];
+    $modelo = $datos['modelo'];
     $aula = $datos['aula'];
-    $response->write(materia::AltaDeMateria($nombre,$aula));
+    $response->write(materia::AltaDeMateria($modelo,$aula));
 });
 $app->post('/modiMateria',function($request,$response){
     $datos = $request->getParsedBody();
-    $nombre = $datos['nombre'];
+    $modelo = $datos['modelo'];
     $aula = $datos['aula'];
     $id = $datos['id'];
-    $response->write(materia::ModificarMateria($id,$nombre,$aula));
+    $response->write(materia::ModificarMateria($id,$modelo,$aula));
 });
 $app->get('/traerTodasLasMaterias',function($request,$response){
     $response->write(materia::TraerTodasLasMaterias());
@@ -461,11 +468,11 @@ $app->post('/cursosPorProfesor',function($request,$response){
 $app->post('/ingresarEncuesta',function($request,$response){
     $datos = $request->getParsedBody();
     $curso = $datos['curso'];
-    $nombre = $datos['nombre'];
+    $modelo = $datos['modelo'];
     $opcion1 = $datos['opcion1'];
     $opcion2 = $datos ['opcion2'];
     $duracion = $datos['duracion'];
-    $response->write(encuesta::agregarEncuesta($curso,$nombre,$opcion1,$opcion2,$duracion));
+    $response->write(encuesta::agregarEncuesta($curso,$modelo,$opcion1,$opcion2,$duracion));
 
     return $response;
 });
@@ -552,16 +559,16 @@ $app->get('/ultimaAsistencia',function ($request,$response){
 //require_once "saludo.php";
 //*******************************************************************************
 $app->post('/agregarUsuario',function($request,$response){
-    $nombre = $request->getParam("nombre");
+    $modelo = $request->getParam("modelo");
     $mail = $request->getParam("mail");
     $sexo = $request->getParam("sexo");
     $password = $request->getParam("password");
     //$datos = $request->getParsedBody();
-    $response->write(Persona::AgregarUsuario($nombre,$mail,$sexo,$password));
+    $response->write(Persona::AgregarUsuario($modelo,$mail,$sexo,$password));
 });
 $app->post('/caca',function($request,$response){
     $datos = $request->getParsedBody();
-    $response->write(Persona::AgregarUsuario($datos["nombre"],$datos["mail"],$datos["sexo"],$datos["password"]));
+    $response->write(Persona::AgregarUsuario($datos["modelo"],$datos["mail"],$datos["sexo"],$datos["password"]));
 });
 
 
