@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2018 a las 19:20:49
+-- Tiempo de generación: 22-05-2018 a las 00:15:48
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -44,6 +44,33 @@ INSERT INTO `items` (`id`, `nombre`, `cantidad`, `precio`, `descripcion`) VALUES
 (1, 'motor fiat', 12, 2544, 'motor de automovil 1.4'),
 (2, 'motor renault', 7, 2874, 'motor de automovil 1.6');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vehiculo`
+--
+
+CREATE TABLE `vehiculo` (
+  `id` int(11) NOT NULL,
+  `modelo` varchar(50) COLLATE utf16_spanish2_ci NOT NULL,
+  `tipo` varchar(50) COLLATE utf16_spanish2_ci NOT NULL,
+  `anio` int(11) NOT NULL,
+  `foto` varchar(50) COLLATE utf16_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `vehiculo`
+--
+
+INSERT INTO `vehiculo` (`id`, `modelo`, `tipo`, `anio`, `foto`) VALUES
+(2, 'kawasaki', 'moto', 2015, '../../../assets/mot01.jpg'),
+(7, 'zanella', 'moto', 2017, '../../../assets/mot01.jpg'),
+(12, 'palio', 'auto', 2001, '../../../assets/au01.jpg'),
+(13, 'taxi', 'auto', 2014, '../../../assets/generica.jpg'),
+(14, 'k250', 'moto', 2015, '../../../assets/generica.jpg'),
+(15, 'corsa', 'auto', 2010, '../../../assets/generica.jpg'),
+(16, 'corsa', 'auto', 2012, '../../../assets/generica.jpg');
+
 --
 -- Índices para tablas volcadas
 --
@@ -55,6 +82,12 @@ ALTER TABLE `items`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `vehiculo`
+--
+ALTER TABLE `vehiculo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -63,6 +96,12 @@ ALTER TABLE `items`
 --
 ALTER TABLE `items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `vehiculo`
+--
+ALTER TABLE `vehiculo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
