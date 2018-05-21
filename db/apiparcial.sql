@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2018 a las 00:15:48
+-- Tiempo de generación: 22-05-2018 a las 01:32:50
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -66,10 +66,11 @@ INSERT INTO `vehiculo` (`id`, `modelo`, `tipo`, `anio`, `foto`) VALUES
 (2, 'kawasaki', 'moto', 2015, '../../../assets/mot01.jpg'),
 (7, 'zanella', 'moto', 2017, '../../../assets/mot01.jpg'),
 (12, 'palio', 'auto', 2001, '../../../assets/au01.jpg'),
-(13, 'taxi', 'auto', 2014, '../../../assets/generica.jpg'),
+(13, 'remis', 'auto', 2015, '../../../assets/generica.jpg'),
 (14, 'k250', 'moto', 2015, '../../../assets/generica.jpg'),
 (15, 'corsa', 'auto', 2010, '../../../assets/generica.jpg'),
-(16, 'corsa', 'auto', 2012, '../../../assets/generica.jpg');
+(16, 'corsa1', 'auto', 2012, '../../../assets/generica.jpg'),
+(22, 'ninja', 'moto', 2016, '../../../assets/generica.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -101,7 +102,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
