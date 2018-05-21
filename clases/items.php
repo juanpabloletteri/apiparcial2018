@@ -58,5 +58,23 @@ class item{
         //return $modelosusuario;
         return json_encode($datos);     
     }
+
+    public static function modificarItem($id,$modelo,$tipo,$anio){
+        $rta = false;
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE `vehiculo` 
+        SET `modelo`= :modelo,
+        `tipo`=:tipo,
+        `anio`= :anio 
+         WHERE id = :id");
+        $consulta->bindValue(':id',$id);
+        $consulta->bindValue(':modelo',$modelo);
+        $consulta->bindValue(':tipo',$tipo);
+        $consulta->bindValue(':anio',$anio);
+        if ($consulta->execute()){
+            $rta = true;
+        }
+        return $rta;
+    }
 }
 ?>

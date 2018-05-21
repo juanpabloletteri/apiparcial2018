@@ -56,7 +56,17 @@ $app->post('/borrarVehiculo',function ($request,$response){
     return $response;
 });
 
+//MODIFICAR ITEM *************************/
+$app->post('/modificarItem',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $modelo = $datos['modelo'];
+    $tipo = $datos['tipo'];
+    $anio = $datos['anio'];
+    $response->write(item::modificarItem($id,$modelo,$tipo,$anio));
 
+    return $response;
+});
 
 
 
